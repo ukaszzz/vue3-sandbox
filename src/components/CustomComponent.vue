@@ -1,23 +1,22 @@
 <template>
-<div>test</div>
-  <button @click="sayHello">hello</button>
-  <button @click="addMark('text')">hello</button>
+<p>{{pension}}</p>
+  <button @click="pensionIncrement">increment</button>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   name: 'HelloWorld',
   setup() {
-    function sayHello() {
-      console.log('hello');
-    }
+    const pension = ref(100);
 
-    function addMark(text) {
-      console.log(`function with argument ${text}`);
+    function pensionIncrement() {
+      pension.value += 1;
     }
     return {
-      sayHello,
-      addMark,
+      pension,
+      pensionIncrement,
     };
   },
 
