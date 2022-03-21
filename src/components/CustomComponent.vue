@@ -8,27 +8,25 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue';
+import { ref, computed } from 'vue';
 
 export default {
   name: 'CustomComponent',
   setup() {
-    const state = reactive({
-      quantity: 0,
-      price: 100,
-      totPrice: 0,
-      tax: 0,
-    });
+    const quantity = ref(0);
+    const price = ref(100);
+    const totPrice = computed(() => price.value * quantity.value);
+    const tax = computed(() => totPrice.value * 0.23);
 
     function addOrder() {
-      state.quantity += 1;
-      state.totPrice = state.quantity * state.price;
-      state.tax = state.totPrice * 0.23;
+      quantity.value += 1;
     }
-
     return {
       addOrder,
-      ...toRefs(state),
+      quantity,
+      price,
+      totPrice,
+      tax,
     };
   },
 
