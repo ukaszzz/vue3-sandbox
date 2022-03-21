@@ -1,26 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <CustomComponent />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import CustomComponent from './components/CustomComponent.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    CustomComponent,
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
