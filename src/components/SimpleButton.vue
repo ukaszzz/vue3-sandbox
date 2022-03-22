@@ -1,19 +1,16 @@
 <template>
-<button>{{text}}</button>
+<button @click="addItem">add</button>
 </template>
 
 <script>
 
 export default {
   name: 'SimpleButton',
-  props: {
-    text: {
-      type: String,
-      default: 'cos',
-    },
-  },
-  setup() {
-    return { };
+  setup(props, { emit }) {
+    function addItem() {
+      emit('addItem');
+    }
+    return { addItem };
   },
 };
 </script>

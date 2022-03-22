@@ -1,29 +1,34 @@
 <template>
-<SimpleButton text="login" @click="isModalVisible = true"/>
-  <teleport to="#modal">
-  <TestModal v-if="isModalVisible"/>
-  </teleport>
-  <SiteFooter/>
+<SimpleButton @add-item="increaseCount"/>
+<BaseNotification :notification="notificationText" @hide-notification="hideNotification"/>
 </template>
 
 <script>
 
-import SiteFooter from '@/components/SiteFooter.vue';
+import BaseNotification from '@/components/BaseNotification.vue';
 import SimpleButton from '@/components/SimpleButton.vue';
-import TestModal from '@/components/TestModal.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 export default {
   name: 'CustomComponent',
   components: {
     SimpleButton,
-    SiteFooter,
-    TestModal,
+    BaseNotification,
   },
   setup() {
-    const isModalVisible = ref(false);
+    const number = ref(0);
 
-    return { isModalVisible };
+    const notificationText = computed(() => `number of item in card ${number.value}`);
+
+    function increaseCount() {
+      number.value += 1;
+      console.log(number.value);
+    }
+
+    function hideNotification() {
+      console.log('hide');
+    }
+    return { increaseCount, notificationText, hideNotification };
   },
 };
 </script>
