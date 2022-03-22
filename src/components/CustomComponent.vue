@@ -1,101 +1,47 @@
 <template>
-  <ItemsList :items="candidates"/>
+  <div>{{count}}</div>
+  <button @click="increment">increment</button>
+  <ChildComponent v-if="count <3"/>
 </template>
 
 <script>
-import { ref, computed } from 'vue';
-import ItemsList from './items/ItemsList.vue';
+import {
+  onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, ref,
+} from 'vue';
+import ChildComponent from '@/components/ChildComponent.vue';
 
 export default {
   name: 'CustomComponent',
   components: {
-    ItemsList,
+    ChildComponent,
   },
   setup() {
-    const candidates = ref([
-      {
-        id: 1,
-        firstName: 'test',
-        lastName: 'test',
-        age: 44,
-        party: 'test',
-        opinionPool: 4,
-      },
-      {
-        id: 2,
-        firstName: 'test',
-        lastName: 'test',
-        age: 37,
-        party: 'test',
-        opinionPool: 7,
-      },
-      {
-        id: 3,
-        firstName: 'test',
-        lastName: 'test',
-        age: 47,
-        party: null,
-        opinionPool: 49,
-      },
-      {
-        id: 4,
-        firstName: 'test',
-        lastName: 'test',
-        age: 43,
-        party: null,
-        opinionPool: 22,
-      },
-      {
-        id: 5,
-        firstName: 'test',
-        lastName: 'test',
-        age: 61,
-        party: 'test',
-        opinionPool: null,
-      },
-      {
-        id: 6,
-        firstName: 'test',
-        lastName: 'test',
-        age: 63,
-        party: 'test',
-        opinionPool: 5,
-      },
-      {
-        id: 7,
-        firstName: 'test',
-        lastName: 'test',
-        age: 38,
-        party: 'test',
-        opinionPool: 12,
-      },
-      {
-        id: 8,
-        firstName: 'test',
-        lastName: 'test',
-        age: 64,
-        party: 'test',
-        opinionPool: null,
-      },
-      {
-        id: 9,
-        firstName: 'test',
-        lastName: 'test',
-        age: 44,
-        party: null,
-        opinionPool: 1,
-      },
-      {
-        id: 10,
-        firstName: 'test',
-        lastName: 'test',
-        age: 64,
-        party: 'test',
-        opinionPool: null,
-      },
-    ]);
-    const candidatesWithParty = computed(() => candidates.value.filter(({ party }) => party));
-    return { candidates, candidatesWithParty };
+    const count = ref(0);
+
+    function increment() {
+      count.value += 1;
+    }
+    console.log('setup');
+
+    onBeforeMount(() => {
+      console.log('onBeforeMount');
+    });
+    onMounted(() => {
+      console.log('onMounted');
+    });
+    onBeforeUpdate(() => {
+      console.log('onBeforeUpdate');
+    });
+    onUpdated(() => {
+      console.log('onUpdated');
+    });
+    onBeforeUnmount(() => {
+      console.log('onBeforeUnmount');
+    });
+    onUnmounted(() => {
+      console.log('onUnmounted');
+    });
+    return { count, increment };
   },
 };
 </script>
