@@ -1,34 +1,29 @@
 <template>
-  <div v-if="errors">errrrrrrrr</div>
-  <Suspense>
-    <template #default> <StarShipsList />
-    </template>
-    <template #fallback>
-      <AppLoader/>
-    </template>
-  </Suspense>
+<SimpleButton text="login" @click="isModalVisible = true"/>
+  <teleport to="#modal">
+  <TestModal v-if="isModalVisible"/>
+  </teleport>
+  <SiteFooter/>
 </template>
 
 <script>
 
-import StarShipsList from '@/components/StarShipsList.vue';
-import AppLoader from '@/components/AppLoader.vue';
-import { onErrorCaptured, ref } from 'vue';
+import SiteFooter from '@/components/SiteFooter.vue';
+import SimpleButton from '@/components/SimpleButton.vue';
+import TestModal from '@/components/TestModal.vue';
+import { ref } from 'vue';
 
 export default {
   name: 'CustomComponent',
   components: {
-    StarShipsList,
-    AppLoader,
+    SimpleButton,
+    SiteFooter,
+    TestModal,
   },
   setup() {
-    const errors = ref(null);
+    const isModalVisible = ref(false);
 
-    onErrorCaptured((e) => {
-      errors.value = e;
-      return true;
-    });
-    return { errors };
+    return { isModalVisible };
   },
 };
 </script>

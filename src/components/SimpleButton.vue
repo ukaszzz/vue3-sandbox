@@ -1,15 +1,15 @@
 <template>
-<p>name: {{ship.name}}</p>
+<button>{{text}}</button>
 </template>
 
 <script>
 
 export default {
-  name: 'SingleShip',
+  name: 'SimpleButton',
   props: {
-    ship: {
-      type: Object,
-      default: () => {},
+    text: {
+      type: String,
+      default: 'cos',
     },
   },
   setup() {
