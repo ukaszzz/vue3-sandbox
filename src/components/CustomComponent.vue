@@ -1,47 +1,25 @@
 <template>
-  <div>{{count}}</div>
-  <button @click="increment">increment</button>
-  <ChildComponent v-if="count <3"/>
+  <ButtonComponent :text="'cos'">
+    <template #image>
+      <img src="public/favicon.ico" alt="sss"/>
+    </template>
+    <template #text>
+     <p>test Text</p>
+    </template>
+  </ButtonComponent>
 </template>
 
 <script>
-import {
-  onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, ref,
-} from 'vue';
-import ChildComponent from '@/components/ChildComponent.vue';
+
+import ButtonComponent from '@/components/ButtonComponent.vue';
 
 export default {
   name: 'CustomComponent',
   components: {
-    ChildComponent,
+    ButtonComponent,
   },
   setup() {
-    const count = ref(0);
-
-    function increment() {
-      count.value += 1;
-    }
-    console.log('setup');
-
-    onBeforeMount(() => {
-      console.log('onBeforeMount');
-    });
-    onMounted(() => {
-      console.log('onMounted');
-    });
-    onBeforeUpdate(() => {
-      console.log('onBeforeUpdate');
-    });
-    onUpdated(() => {
-      console.log('onUpdated');
-    });
-    onBeforeUnmount(() => {
-      console.log('onBeforeUnmount');
-    });
-    onUnmounted(() => {
-      console.log('onUnmounted');
-    });
-    return { count, increment };
+    return { };
   },
 };
 </script>
