@@ -1,34 +1,35 @@
 <template>
-<SimpleButton @add-item="increaseCount"/>
-<BaseNotification :notification="notificationText" @hide-notification="hideNotification"/>
+<BaseInput name="input" v-model:firstName="firstName" v-model:lastName="lastName"/>
+  <p>{{lastName}}</p>
+  <p>{{firstName}}</p>
+  <button class="button" @click="revertText">revert Text</button>
 </template>
 
 <script>
 
-import BaseNotification from '@/components/BaseNotification.vue';
-import SimpleButton from '@/components/SimpleButton.vue';
-import { computed, ref } from 'vue';
+import BaseInput from '@/components/BaseInput.vue';
+import { ref } from 'vue';
 
 export default {
   name: 'CustomComponent',
   components: {
-    SimpleButton,
-    BaseNotification,
+    BaseInput,
   },
   setup() {
-    const number = ref(0);
+    const firstName = ref('');
+    const lastName = ref('');
 
-    const notificationText = computed(() => `number of item in card ${number.value}`);
-
-    function increaseCount() {
-      number.value += 1;
-      console.log(number.value);
+    function revertText() {
+      firstName.value = firstName.value.split('').reverse().join('');
+      lastName.value = lastName.value.split('').reverse().join('');
+      return lastName.value;
     }
 
-    function hideNotification() {
-      console.log('hide');
-    }
-    return { increaseCount, notificationText, hideNotification };
+    return {
+      revertText,
+      firstName,
+      lastName,
+    };
   },
 };
 </script>
