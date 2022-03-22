@@ -1,25 +1,34 @@
 <template>
-  <ButtonComponent :text="'cos'">
-    <template #image>
-      <img src="public/favicon.ico" alt="sss"/>
+  <div v-if="errors">errrrrrrrr</div>
+  <Suspense>
+    <template #default> <StarShipsList />
     </template>
-    <template #text>
-     <p>test Text</p>
+    <template #fallback>
+      <AppLoader/>
     </template>
-  </ButtonComponent>
+  </Suspense>
 </template>
 
 <script>
 
-import ButtonComponent from '@/components/ButtonComponent.vue';
+import StarShipsList from '@/components/StarShipsList.vue';
+import AppLoader from '@/components/AppLoader.vue';
+import { onErrorCaptured, ref } from 'vue';
 
 export default {
   name: 'CustomComponent',
   components: {
-    ButtonComponent,
+    StarShipsList,
+    AppLoader,
   },
   setup() {
-    return { };
+    const errors = ref(null);
+
+    onErrorCaptured((e) => {
+      errors.value = e;
+      return true;
+    });
+    return { errors };
   },
 };
 </script>
